@@ -105,7 +105,7 @@ export default function ChessPlayerPortfolio() {
                         <li>Título de Mestre Internacional conquistado em 2010</li>
                         <li>Pentacampeão Nacional de Xadrez</li>
                         <li>Técnico da Seleção Júnior Nacional (2015-2020)</li>
-                        <li>Autor do livro "Pensamento Estratégico no Xadrez" (2018)</li>
+                        <li>Autor do livro 'Pensamento Estratégico no Xadrez' (2018)</li>
                         <li>Treinei mais de 1000 alunos, muitos deles se tornaram mestres</li>
                     </ul>
                 </div>
