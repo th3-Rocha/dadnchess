@@ -32,34 +32,30 @@ export function FeedbackForm() {
     };
 
     return (
-        <div className="w-full md:max-w-md">
-            <Card title="Leave Feedback">
-                <form
-                    name="feedback"
-                    onSubmit={handleFormSubmit}
-                    className="text-black flex flex-col gap-3 align-center"
-                >
-                    <input type="hidden" name="form-name" value="feedback" />
-                    <input name="name" type="text" placeholder="Name" required className="input input-bordered" />
-                    <input name="email" type="text" placeholder="Email (optional)" className="input input-bordered" />
-                    <input name="message" type="text" placeholder="Message" required className="input input-bordered" />
-                    <button className="btn btn-primary" type="submit" disabled={status === 'pending'}>
-                        Submit
-                    </button>
-                    {status === 'ok' && (
-                        <div className="alert alert-success">
-                            <SuccessIcon />
-                            Submitted!
-                        </div>
-                    )}
-                    {status === 'error' && (
-                        <div className="alert alert-error">
-                            <ErrorIcon />
-                            {error}
-                        </div>
-                    )}
-                </form>
-            </Card>
+        <div className=" container max-w-2xl  mx-auto">
+            <h2 className="text-3xl font-bold mb-8 text-center">Entre em Contato</h2>
+            <form name="feedback" onSubmit={handleFormSubmit} className="text-black flex flex-col gap-3 align-center">
+                <input type="hidden" name="form-name" value="feedback" />
+                <input name="name" type="text" placeholder="Nome" required className="input input-bordered" />
+                <input name="email" type="text" placeholder="Email" required className="input input-bordered" />
+                <input name="message" type="text" placeholder="Mensagem" required className="input input-bordered" />
+                <button className="w-full btn btn-primary mb-8" type="submit" disabled={status === 'pending'}>
+                    Submit
+                </button>
+
+                {status === 'ok' && (
+                    <div className="alert alert-success">
+                        <SuccessIcon />
+                        Enviado!
+                    </div>
+                )}
+                {status === 'error' && (
+                    <div className="alert alert-error">
+                        <ErrorIcon />
+                        {error}
+                    </div>
+                )}
+            </form>
         </div>
     );
 }
