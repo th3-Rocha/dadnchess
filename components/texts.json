@@ -1,0 +1,77 @@
+{
+    "title": "Domine o Jogo dos Reis",
+    "subtitle": "Aprenda xadrez com um Mestre Nacional experiente",
+    "cta": "Comece Sua Jornada no Xadrez",
+    "about": {
+        "title": "Quem Sou Eu",
+        "content": [
+            "Sou Mestre Nacional com mais de 4 anos de experiência, e o xadrez é mais do que um jogo para mim, é uma paixão. Minha missão é revelar a beleza e os segredos do xadrez, ajudando jogadores de todos os níveis a desenvolverem suas habilidades.",
+            "Seja você um iniciante que deseja dominar os fundamentos ou um jogador avançado em busca de novas estratégias, estou aqui para guiá-lo em sua jornada pelo xadrez."
+        ]
+    },
+    "services": {
+        "title": "Serviços Oferecidos",
+        "items": [
+            {
+                "title": "Aulas Individuais",
+                "description": "Aulas personalizadas que se adaptam ao seu nível e às suas metas, garantindo evolução contínua."
+            },
+            {
+                "title": "Disponibilidade Total",
+                "description": "Precisa de ajuda com uma jogada ou dúvida? Estou à disposição 24 horas por dia para te apoiar em sua jornada no xadrez."
+            },
+            {
+                "title": "Preparação para Torneios",
+                "description": "Treinamento especializado para destacar-se em torneios competitivos, com análises de adversários e acompanhamento durante as partidas."
+            }
+        ]
+    },
+    "achievements": {
+        "title": "Minhas Conquistas",
+        "items": [
+            "Mestre Nacional desde 2020",
+            "1º e 2º Lugar nos Jogos Universitários Absoluto 2022/2024",
+            "Campeão Estadual Absoluto RN 2021",
+            "Campeão Norte-Nordeste Blitz 2022",
+            "3º Lugar no Campeonato Brasileiro Absoluto Rápido 2023",
+            "1º Lugar nos Jogos Escolares da Juventude do RN 2019"
+        ]
+    },
+    "lichessStats": {
+        "title": "Ratings no Lichess"
+    },
+    "testimonials": {
+        "title": "O que meus alunos dizem",
+        "items": [
+            {
+                "content": "Graças às aulas, melhorei meu rating em 300 pontos!",
+                "author": "Alex K."
+            },
+            {
+                "content": "As aulas online são convenientes e tão eficazes quanto as presenciais.",
+                "author": "Sarah M."
+            }
+        ]
+    },
+    "faq": {
+        "title": "Perguntas Frequentes",
+        "items": [
+            {
+                "question": "Para que nível de jogadores você dá aulas?",
+                "answer": "Ensino xadrez para todos os níveis, desde iniciantes até jogadores avançados que querem melhorar seu jogo."
+            },
+            {
+                "question": "Quanto tempo duram as suas aulas?",
+                "answer": "Minhas aulas padrão têm duração de 60 minutos, mas também ofereço sessões de 30 ou 90 minutos para se adequarem às suas necessidades."
+            },
+            {
+                "question": "Você oferece aulas online?",
+                "answer": "Sim, ofereço aulas tanto presenciais quanto online, usando ferramentas de videoconferência para maior flexibilidade."
+            }
+        ]
+    },
+    "footer": {
+        "copyright": "© 2024 Dadn-Chess. Todos os direitos reservados.",
+        "email": "nmdavialves@gmail.com"
+    }
+}

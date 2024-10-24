@@ -18,6 +18,7 @@
         "clsx": "^2.1.1",
         "embla-carousel-autoplay": "^8.3.0",
         "embla-carousel-react": "^8.3.0",
+        "framer-motion": "^11.11.9",
         "locomotive-scroll": "^4.1.4",
         "lucide-react": "^0.453.0",
         "markdown-to-jsx": "^7.4.5",
@@ -35,6 +36,7 @@
         "eslint": "8.57.1",
         "eslint-config-next": "14.2.15",
         "postcss": "^8.4.36",
+        "tailwind-scrollbar": "^3.1.0",
         "tailwindcss": "^3.4.1"
     }
 }

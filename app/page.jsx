@@ -1,6 +1,7 @@
 'use client';
+import { useState, useEffect, useRef } from 'react';
+import { Phone, MapPin } from 'lucide-react';
 
-import { useState, useEffect } from 'react';
 import {
     Trophy,
     Users,
@@ -69,7 +70,7 @@ const texts = {
         items: [
             {
                 content: 'Graças às aulas, melhorei meu rating em 300 pontos!',
-                author: 'Alex K.'
+                author: 'Jair C.'
             },
             {
                 content: 'As aulas online são convenientes e tão eficazes quanto as presenciais.',
@@ -97,27 +98,28 @@ const texts = {
     footer: {
         copyright: '© 2024 Dadn-Chess. Todos os direitos reservados.',
         email: 'nmdavialves@gmail.com'
+    },
+    contact: {
+        title: 'Entre em Contato',
+        email: 'nmdavialves@gmail.com',
+        phone: '+55 84 9920-6610'
     }
 };
-
+const achievements = texts.achievements.items.map((title) => ({ title }));
+const lichessStats = [
+    { icon: Zap, label: 'Blitz Rating', value: '2450' },
+    { icon: Target, label: 'Rapid Rating', value: '2380' },
+    { icon: Clock, label: 'Classical Rating', value: '2520' },
+    { icon: Award, label: 'Tournaments Won', value: '37' }
+];
 export default function ChessPlayerPortfolio() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [faqOpen, setFaqOpen] = useState(null);
-    const [currentSlide, setCurrentSlide] = useState(0);
     const [darkMode, setDarkMode] = useState(true);
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
     };
-
-    const achievements = texts.achievements.items.map((title) => ({ title }));
-
-    const lichessStats = [
-        { icon: Zap, label: 'Blitz Rating', value: '2450' },
-        { icon: Target, label: 'Rapid Rating', value: '2380' },
-        { icon: Clock, label: 'Classical Rating', value: '2520' },
-        { icon: Award, label: 'Tournaments Won', value: '37' }
-    ];
 
     useEffect(() => {
         if (darkMode) {
@@ -128,7 +130,11 @@ export default function ChessPlayerPortfolio() {
     }, [darkMode]);
 
     return (
-        <div className={`min-h-screen ${darkMode ? 'dark bg-gray-900 text-white' : 'bg-white'}`}>
+        <div
+            className={`min-h-screen ${
+                darkMode ? 'dark bg-gray-900 text-white' : 'bg-white'
+            } scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 h-32 overflow-y-scroll `}
+        >
             <header
                 className={`sticky top-0 z-50 w-full border-b ${
                     darkMode ? 'border-gray-700 bg-gray-800/80' : 'border-gray-200 bg-white/80'
@@ -171,6 +177,14 @@ export default function ChessPlayerPortfolio() {
                                 }`}
                             >
                                 Lichess Stats
+                            </a>
+                            <a
+                                href="#contact"
+                                className={`text-sm font-medium ${
+                                    darkMode ? 'hover:text-blue-400' : 'hover:text-blue-600'
+                                }`}
+                            >
+                                Contato
                             </a>
                             <a
                                 href="#faqs"
@@ -230,12 +244,12 @@ export default function ChessPlayerPortfolio() {
                                 Lichess Stats
                             </a>
                             <a
-                                href="#Faqs"
+                                href="#contact"
                                 className={`block px-3 py-2 text-base font-medium ${
-                                    darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                                       darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
                                 }`}
                             >
-                                Faqs
+                                Contato
                             </a>
                         </div>
                     </div>
@@ -243,13 +257,13 @@ export default function ChessPlayerPortfolio() {
             </header>
 
             <main>
-                <section className="py-12 md:py-24 text-center">
+                <section className="py-12 md:py-24 text-center" data-scroll-section>
                     <div className="container mx-auto px-4">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4">{texts.title}</h1>
                         <p className={`text-xl mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                             {texts.subtitle}
                         </p>
-                        <Button size="lg" className={`rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-50'} `}  >
+                        <Button size="lg" className={`rounded-full ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
                             {texts.cta}
                         </Button>
                         <div className="mt-12">
@@ -257,8 +271,7 @@ export default function ChessPlayerPortfolio() {
                         </div>
                     </div>
                 </section>
-
-                <section id="about" className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                <section data-scroll-section id="about" className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold mb-8 text-center">{texts.about.title}</h2>
                         <div className="flex flex-col md:flex-row items-center gap-8">
@@ -279,8 +292,7 @@ export default function ChessPlayerPortfolio() {
                         </div>
                     </div>
                 </section>
-
-                <section id="services" className="py-16">
+                <section data-scroll-section id="services" className="py-16">
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold mb-8 text-center">{texts.services.title}</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -299,8 +311,11 @@ export default function ChessPlayerPortfolio() {
                         </div>
                     </div>
                 </section>
-
-                <section id="achievements" className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                <section
+                    data-scroll-section
+                    id="achievements"
+                    className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
+                >
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold mb-8 text-center">{texts.achievements.title}</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -318,8 +333,7 @@ export default function ChessPlayerPortfolio() {
                         </div>
                     </div>
                 </section>
-
-                <section id="lichess-stats" className="py-16">
+                <section data-scroll-section id="lichess-stats" className="py-16">
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold mb-8 text-center">{texts.lichessStats.title}</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -340,8 +354,11 @@ export default function ChessPlayerPortfolio() {
                         </div>
                     </div>
                 </section>
-
-                <section id="testimonials" className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+                <section
+                    data-scroll-section
+                    id="testimonials"
+                    className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}
+                >
                     <div className="container mx-auto px-4">
                         <h2 className="text-3xl font-bold mb-8 text-center">{texts.testimonials.title}</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -357,9 +374,38 @@ export default function ChessPlayerPortfolio() {
                         </div>
                     </div>
                 </section>
-
-                <section id="faqs" className="py-16">
+                <section id="contact" className="py-16" data-scroll-section>
                     <div className="container mx-auto px-4">
+                        <h2 className="text-3xl font-bold mb-8 text-center">{texts.contact.title}</h2>
+                        <div className="space-y-4 max-w-md mx-auto">
+                            <div className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} pb-4`}>
+                                <div className="flex items-center">
+                                    <Mail className="h-5 w-5 mr-3" />
+                                    <span className="font-medium">Email</span>
+                                </div>
+                                <p className={`mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                                    <a href={`mailto:${texts.contact.email}`} className="hover:underline">
+                                        {texts.contact.email}
+                                    </a>
+                                </p>
+                            </div>
+                            <div className={`border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} pb-4`}>
+                                <div className="flex items-center">
+                                    <Phone className="h-5 w-5 mr-3" />
+                                    <span className="font-medium">Celular</span>
+                                </div>
+                                <p className={`mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                                    <a href={`tel:${texts.contact.phone}`} className="hover:underline">
+                                        {texts.contact.phone}
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="faqs" className={`py-16 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`} data-scroll-section>
+                    <div className="container mx-auto px-4 ">
                         <h2 className="text-3xl font-bold mb-8 text-center">{texts.faq.title}</h2>
                         <div className="space-y-4">
                             {texts.faq.items.map((item, index) => (
@@ -390,7 +436,7 @@ export default function ChessPlayerPortfolio() {
                 </section>
             </main>
 
-            <footer className={`py-8 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
+            <footer data-scroll-section className={`py-8 ${darkMode ? 'bg-gray-800' : 'bg-gray-50'}`}>
                 <div className="container mx-auto px-4 text-center">
                     <p>{texts.footer.copyright}</p>
                     <div className="flex justify-center items-center gap-2 mt-4">
