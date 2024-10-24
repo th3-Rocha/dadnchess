@@ -1,149 +1,315 @@
-import { Trophy, Users, Mail, ChevronDown, CalendarClock } from 'lucide-react';
+'use client';
+
+import styled from 'styled-components';
+import { Trophy, Users, Mail, ChevronDown, CalendarClock, Menu, X, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { FeedbackForm } from 'components/feedback-form';
+import { useState } from 'react';
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+`;
+
+const Header = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  border-bottom: 1px solid #e5e7eb;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const HeaderContent = styled.div`
+  display: flex;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const NavLink = styled.a`
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #3b82f6;
+  }
+`;
+
+const HeroSection = styled.section`
+  padding: 6rem 1.5rem;
+  text-align: center;
+`;
+
+const HeroTitle = styled.h1`
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+
+  @media (min-width: 1024px) {
+    font-size: 3rem;
+  }
+`;
+
+const HeroSubtitle = styled.p`
+  font-size: 1.25rem;
+  color: #6b7280;
+  margin-bottom: 2rem;
+`;
+
+const AboutSection = styled.section`
+  padding: 4rem 0;
+  background-color: #f3f4f6;
+`;
+
+const AboutContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
+
+const AboutImage = styled.img`
+  border-radius: 50%;
+  width: 300px;
+  height: 300px;
+`;
+
+const AboutText = styled.div`
+  flex: 2;
+`;
+
+const ServicesSection = styled.section`
+  padding: 4rem 0;
+`;
+
+const ServicesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const ServiceCard = styled.div`
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+`;
+
+const TestimonialsSection = styled.section`
+  padding: 5rem 0;
+  background-color: #f3f4f6;
+`;
+
+const TestimonialsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const TestimonialCard = styled.div`
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+`;
+
+const FAQSection = styled.section`
+  padding: 5rem 0;
+`;
+
+const FAQItem = styled.div`
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1rem;
+`;
+
+const FAQButton = styled.button`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  font-weight: 500;
+`;
+
+const Footer = styled.footer`
+  padding: 1.5rem 0;
+  background-color: #f3f4f6;
+  text-align: center;
+`;
 
 export default function ChessPlayerPortfolio() {
-    return (
-        <div>
-            {/* Cabeçalho */}
-            <header className=" mr-4 hidden  md:flex sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
-                <div className="container flex h-14 items-center justify-between  mx-auto ">
-                    <div className="mr-4 hidden md:flex ">
-                        <span className="ml-2 font-bold">Davi Alves</span>
-                    </div>
-                    <nav className="flex items-center space-x-4 lg:space-x-6 mx-6">
-                        <a href="#about" className="text-sm font-medium transition-colors hover:text-primary">
-                            Sobre
-                        </a>
-                        <a href="#services" className="text-sm font-medium transition-colors hover:text-primary">
-                            Serviços
-                        </a>
-                        <a href="#achievements" className="text-sm font-medium transition-colors hover:text-primary">
-                            Conquistas
-                        </a>
-                        <a href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
-                            Contato
-                        </a>
-                    </nav>
-                </div>
-            </header>
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(null);
 
-            {/* Seção Hero */}
-            <section className="py-24 px-6 text-center ">
-                <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">Domine o Jogo dos Reis</h1>
-                <p className="text-xl text-muted-foreground mb-8">
-                    Aprenda xadrez com um Mestre Internacional experiente
-                </p>
-                <Button size="lg" className="rounded-full">
-                    Comece Sua Jornada no Xadrez
-                </Button>
-                <div className="mt-12">
-                    <ChevronDown className="h-8 w-8 mx-auto animate-bounce" />
-                </div>
-            </section>
+  const faqItems = [
+    {
+      question: 'What level of chess players do you teach?',
+      answer: 'I teach chess to players of all levels, from complete beginners to advanced players looking to improve their game.'
+    },
+    {
+      question: 'How long are your chess lessons?',
+      answer: 'My standard chess lessons are 60 minutes long, but I also offer 30-minute and 90-minute sessions to suit different needs and schedules.'
+    },
+    {
+      question: 'Do you offer online lessons?',
+      answer: 'Yes, I offer both in-person and online chess lessons using video conferencing tools for maximum flexibility.'
+    }
+  ];
 
-            {/* Seção Sobre Mim */}
-            <section id="about" className="py-16 bg-secondary ">
-                <div className="container mx-auto">
-                    <h2 className="text-3xl font-bold mb-8 text-center">Sobre Mim</h2>
-                    <div className="flex flex-col md:flex-row items-center gap-8">
-                        <div className="w-full md:w-1/3">
-                            <img
-                                src="/placeholder.svg?height=300&width=300"
-                                alt="Professor de Xadrez"
-                                className="rounded-full mx-auto"
-                                width={300}
-                                height={300}
-                            />
-                        </div>
-                        <div className="w-full md:w-2/3">
-                            <p className="text-lg mb-4">
-                                Com mais de 15 anos de experiência como Mestre Internacional, dediquei minha vida ao
-                                belo jogo do xadrez. Minha paixão é compartilhar os segredos e as belezas do xadrez com
-                                jogadores de todos os níveis.
-                            </p>
-                            <p className="text-lg">
-                                Seja você um iniciante buscando aprender o básico ou um jogador avançado querendo
-                                aprimorar suas estratégias, estou aqui para guiá-lo em sua jornada no xadrez.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Seção Serviços */}
-            <section id="services" className="py-16">
-                <div className="container  mx-auto">
-                    <h2 className="text-3xl font-bold mb-8 text-center">Meus Serviços</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div className="bg-card text-card-foreground rounded-lg p-6 shadow-lg">
-                            <Users className="h-12 w-12 mb-4" />
-                            <h3 className="text-xl font-semibold mb-2">Aulas Individuais</h3>
-                            <p>Instruções personalizadas de acordo com seu nível e objetivos.</p>
-                        </div>
-                        <div className="bg-card text-card-foreground rounded-lg p-6 shadow-lg">
-                            <CalendarClock className="h-12 w-12 mb-4 " />
-                            <h3 className="text-xl font-semibold mb-2">Aulas 24h</h3>
-                            <p>Sessões interativas focadas em estratégia, tática e análise de partidas.</p>
-                        </div>
-                        <div className="bg-card text-card-foreground rounded-lg p-6 shadow-lg">
-                            <Trophy className="h-12 w-12 mb-4 " />
-                            <h3 className="text-xl font-semibold mb-2">Preparação para Torneios</h3>
-                            <p>Treinamento especializado para você se destacar em ambientes competitivos.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Seção Conquistas */}
-            <section id="achievements" className="py-16 bg-secondary">
-                <div className="container  mx-auto">
-                    <h2 className="text-3xl font-bold mb-8 text-center">Conquistas</h2>
-                    <ul className="list-disc list-inside text-lg space-y-2">
-                        <li>Título de Mestre Internacional conquistado em 2010</li>
-                        <li>Pentacampeão Nacional de Xadrez</li>
-                        <li>Técnico da Seleção Júnior Nacional (2015-2020)</li>
-                        <li>Autor do livro &quot;Pensamento Estratégico no Xadrez&quot; (2018)</li>
-                        <li>Treinei mais de 1000 alunos, muitos deles se tornaram mestres</li>
-                    </ul>
-                </div>
-            </section>
-
-            {/* Formulário de Contato
-               <section id="contact" className="py-16">
-                <div className="container max-w-2xl  mx-auto">
-                    <h2 className="text-3xl font-bold mb-8 text-center">Entre em Contato</h2>
-                    <form className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
-                            <Input placeholder="Nome" />
-                            <Input placeholder="Sobrenome" />
-                        </div>
-                        <Input type="email" placeholder="E-mail" />
-                        <Textarea placeholder="Sua Mensagem" />
-                        <Button type="submit" className="w-full">
-                            Enviar Mensagem
-                        </Button>
-                    </form>
-                </div>
-            </section>
-             */}
-         
-            <div className="flex w-full pt-12 justify-center">
-                <FeedbackForm />
+  return (
+    <div>
+      <Header>
+        <Container>
+          <HeaderContent>
+            <div>
+              <span style={{ fontWeight: 'bold', marginLeft: '0.5rem' }}>Davi Alves</span>
             </div>
+            <Nav>
+              <NavLink href="#about">Sobre</NavLink>
+              <NavLink href="#services">Serviços</NavLink>
+              <NavLink href="#achievements">Conquistas</NavLink>
+              <NavLink href="#contact">Contato</NavLink>
+            </Nav>
+          </HeaderContent>
+        </Container>
+      </Header>
 
-            {/* Rodapé */}
-            <footer className="py-6 bg-secondary">
-                <div className="container text-center mx-auto">
-                    <p>&copy; 2024 Dadn Chess. Todos os direitos reservados.</p>
-                    <div className="flex justify-center space-x-4 mt-4">
-                        <Mail className="h-6 w-6" />
-                        <span>dadn@mestrechess.com</span>
-                    </div>
-                </div>
-            </footer>
+      <HeroSection>
+        <HeroTitle>Domine o Jogo dos Reis</HeroTitle>
+        <HeroSubtitle>Aprenda xadrez com um Mestre Nacional experiente</HeroSubtitle>
+        <Button size="lg" style={{ borderRadius: '9999px' }}>
+          Comece Sua Jornada no Xadrez
+        </Button>
+        <div style={{ marginTop: '3rem' }}>
+          <ChevronDown style={{ height: '2rem', width: '2rem', margin: '0 auto', animation: 'bounce 1s infinite' }} />
         </div>
-    );
+      </HeroSection>
+
+      <AboutSection id="about">
+        <Container>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', textAlign: 'center' }}>Sobre Mim</h2>
+          <AboutContent>
+            <div style={{ flex: 1 }}>
+              <AboutImage
+                src="/images/ProfilePic.webp?height=300&width=300"
+                alt="Professor de Xadrez"
+              />
+            </div>
+            <AboutText>
+              <p style={{ fontSize: '1.125rem', marginBottom: '1rem' }}>
+                Com mais de 4 anos de experiência como Mestre Nacional, dediquei minha vida ao belo jogo
+                do xadrez. Minha paixão é compartilhar os segredos e as belezas do xadrez com jogadores
+                de todos os níveis.
+              </p>
+              <p style={{ fontSize: '1.125rem' }}>
+                Seja você um iniciante buscando aprender o básico ou um jogador avançado querendo
+                aprimorar suas estratégias, estou aqui para guiá-lo em sua jornada no xadrez.
+              </p>
+            </AboutText>
+          </AboutContent>
+        </Container>
+      </AboutSection>
+
+      <ServicesSection id="services">
+        <Container>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', textAlign: 'center' }}>Meus Serviços</h2>
+          <ServicesGrid>
+            <ServiceCard>
+              <Users style={{ height: '3rem', width: '3rem', marginBottom: '1rem' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>Aulas Individuais</h3>
+              <p>Instruções personalizadas de acordo com seu nível e objetivos.</p>
+            </ServiceCard>
+            <ServiceCard>
+              <CalendarClock style={{ height: '3rem', width: '3rem', marginBottom: '1rem' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>Disponibilade 24h</h3>
+              <p>
+                Estou sempre à disposição para responder suas perguntas sobre xadrez. Não hesite em
+                entrar em contato a qualquer momento!
+              </p>
+            </ServiceCard>
+            <ServiceCard>
+              <Trophy style={{ height: '3rem', width: '3rem', marginBottom: '1rem' }} />
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '600', marginBottom: '0.5rem' }}>Preparação para Torneios</h3>
+              <p>
+                Treinamento especializado para você se destacar em ambientes competitivos. Vou
+                acompanhá-lo durante os torneios e prepará-lo, além de analisar o histórico dos
+                adversários.
+              </p>
+            </ServiceCard>
+          </ServicesGrid>
+        </Container>
+      </ServicesSection>
+
+      <TestimonialsSection id="testimonials">
+        <Container>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', textAlign: 'center' }}>What My Students Say</h2>
+          <TestimonialsGrid>
+            <TestimonialCard>
+              <p style={{ marginBottom: '1rem' }}>"Thanks to these lessons, I've improved my rating by 300 points!"</p>
+              <p style={{ fontWeight: 'bold' }}>- Alex K.</p>
+            </TestimonialCard>
+            <TestimonialCard>
+              <p style={{ marginBottom: '1rem' }}>
+                "The online lessons are convenient and just as effective as in-person training."
+              </p>
+              <p style={{ fontWeight: 'bold' }}>- Sarah M.</p>
+            </TestimonialCard>
+          </TestimonialsGrid>
+        </Container>
+      </TestimonialsSection>
+
+      <FAQSection>
+        <Container>
+          <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', textAlign: 'center' }}>Frequently Asked Questions</h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {faqItems.map((item, index) => (
+              <FAQItem key={index}>
+                <FAQButton onClick={() => setFaqOpen(faqOpen === index ? null : index)}>
+                  <span>{item.question}</span>
+                  {faqOpen === index ? <ChevronUp /> : <ChevronDown />}
+                </FAQButton>
+                {faqOpen === index && <p style={{ marginTop: '0.5rem', color: '#4b5563' }}>{item.answer}</p>}
+              </FAQItem>
+            ))}
+          </div>
+        </Container>
+      </FAQSection>
+
+      <Footer>
+        <Container>
+          <p>&copy; 2024 Dadn-Chess. Todos os direitos reservados.</p>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '1rem' }}>
+            <Mail style={{ height: '1.5rem', width: '1.5rem' }} />
+            <span>nmdavialves@gmail.com</span>
+          </div>
+        </Container>
+      </Footer>
+    </div>
+  );
 }
