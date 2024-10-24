@@ -283,7 +283,7 @@ export default function ChessPlayerPortfolio() {
                     <TestimonialsGrid>
                         <TestimonialCard>
                             <p style={{ marginBottom: '1rem' }}>
-                                &quot;Thanks to these lessons, I've improved my rating by 300 points!&quot;
+                                &quot;Thanks to these lessons, I&quot;ve improved my rating by 300 points!&quot;
                             </p>
                             <p style={{ fontWeight: 'bold' }}>- Alex K.</p>
                         </TestimonialCard>
